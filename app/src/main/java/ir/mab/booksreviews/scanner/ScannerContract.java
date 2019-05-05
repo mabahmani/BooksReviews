@@ -1,9 +1,7 @@
 package ir.mab.booksreviews.scanner;
 
 import android.hardware.Camera;
-import android.support.v4.app.FragmentActivity;
 
-import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 
@@ -20,13 +18,9 @@ public interface ScannerContract {
 
         void loadPreview();
 
-        void loadNoCameraAvailable();
-
     }
 
     interface Presenter extends BasePresenter{
-
-        FirebaseVisionBarcodeDetector getFirebaseVisionBarcodeDetector();
 
         FirebaseVisionImageMetadata getFirebaseVisionImageMetadata(int width,int height,int imageFormat);
 

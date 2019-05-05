@@ -1,7 +1,5 @@
 package ir.mab.booksreviews.scanner;
 
-import android.Manifest;
-import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -20,25 +18,13 @@ import java.util.List;
 
 public class ScannerPresenter implements ScannerContract.Presenter {
 
-    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 100 ;
     private ScannerContract.View mScannerView;
 
-    public ScannerPresenter(ScannerContract.View scannerView) {
+    ScannerPresenter(ScannerContract.View scannerView) {
         this.mScannerView = scannerView;
         scannerView.setPresenter(this);
     }
 
-    @Override
-    public FirebaseVisionBarcodeDetector getFirebaseVisionBarcodeDetector() {
-
-        FirebaseVisionBarcodeDetectorOptions options = new FirebaseVisionBarcodeDetectorOptions.Builder()
-                .setBarcodeFormats(
-                        FirebaseVisionBarcode.FORMAT_EAN_13,
-                        FirebaseVisionBarcode.FORMAT_EAN_8)
-                .build();
-        return FirebaseVision.getInstance()
-                .getVisionBarcodeDetector(options);
-    }
 
     @Override
     public FirebaseVisionImageMetadata getFirebaseVisionImageMetadata(int width, int height, int imageFormat) {
@@ -54,18 +40,16 @@ public class ScannerPresenter implements ScannerContract.Presenter {
         Camera c = null;
         try {
             c = Camera.open(); // attempt to get a Camera instance
-            //mScannerView.loadPreview();
         }
         catch (Exception e){
             // Camera is not available (in use or does not exist)
-            mScannerView.loadNoCameraAvailable();
         }
         return c; // returns null if camera is unavailable
     }
 
     @Override
     public void detectBarcode(FirebaseVisionImage image) {
-        new Ditector(mScannerView,this).execute(image);
+        new Detector(mScannerView,this).execute(image);
     }
 
     @Override
@@ -79,13 +63,25 @@ public class ScannerPresenter implements ScannerContract.Presenter {
         }
     }
 
+    private static FirebaseVisionBarcodeDetector getFirebaseVisionBarcodeDetector() {
 
-    static class Ditector extends AsyncTask<FirebaseVisionImage,Boolean,Integer> {
+        FirebaseVisionBarcodeDetectorOptions options = new FirebaseVisionBarcodeDetectorOptions.Builder()
+                .setBarcodeFormats(
+                        FirebaseVisionBarcode.FORMAT_EAN_13,
+                        FirebaseVisionBarcode.FORMAT_EAN_8)
+                .build();
+
+        return FirebaseVision.getInstance()
+                .getVisionBarcodeDetector(options);
+    }
+
+
+    static class Detector extends AsyncTask<FirebaseVisionImage,Boolean,Integer> {
 
         private ScannerContract.View view;
         private ScannerContract.Presenter presenter;
 
-        Ditector(ScannerContract.View view, ScannerContract.Presenter presenter) {
+        Detector(ScannerContract.View view, ScannerContract.Presenter presenter) {
             this.view = view;
             this.presenter = presenter;
         }
@@ -93,7 +89,7 @@ public class ScannerPresenter implements ScannerContract.Presenter {
         @Override
         protected Integer doInBackground(FirebaseVisionImage... firebaseVisionImages) {
             Log.d("BARCODE","do back");
-            presenter.getFirebaseVisionBarcodeDetector().detectInImage(firebaseVisionImages[0])
+            getFirebaseVisionBarcodeDetector().detectInImage(firebaseVisionImages[0])
                     .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionBarcode>>() {
                         @Override
                         public void onSuccess(List<FirebaseVisionBarcode> barcodes) {

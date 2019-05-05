@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,19 +69,17 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
         preview = new Preview(getContext(),camera);
         livePreview.addView(preview);
 
+        final int supportedWidth = camera.getParameters().getSupportedPreviewSizes().get(0).width;
+        final int supportedHeight = camera.getParameters().getSupportedPreviewSizes().get(0).height;
+
         camera.setPreviewCallback(new Camera.PreviewCallback() {
             @Override
             public void onPreviewFrame(byte[] data, Camera camera) {
-                FirebaseVisionImageMetadata metadata = presenter.getFirebaseVisionImageMetadata(480,360,FirebaseVisionImageMetadata.IMAGE_FORMAT_NV21);
+                FirebaseVisionImageMetadata metadata = presenter.getFirebaseVisionImageMetadata(supportedWidth,supportedHeight,FirebaseVisionImageMetadata.IMAGE_FORMAT_NV21);
                 FirebaseVisionImage image = FirebaseVisionImage.fromByteArray(data,metadata);
                 mPresenter.detectBarcode(image);
             }
         });
-    }
-
-    @Override
-    public void loadNoCameraAvailable() {
-        Toast.makeText(getContext(),"onLoadNoCameraAvailable",Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -100,7 +99,7 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
         if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA){
             if (grantResults.length > 0
             && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                mPresenter.getCameraInstance();
+                presenter.getCameraInstance();
             }
 
             else {
