@@ -1,4 +1,4 @@
-package ir.mab.booksreviews.ScannerUtils;
+package ir.mab.booksreviews.utils;
 
 import android.app.Activity;
 import android.content.Context;

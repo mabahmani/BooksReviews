@@ -8,6 +8,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
+import ir.mab.booksreviews.history.HistoryFragment;
+import ir.mab.booksreviews.scanner.ScannerFragment;
+import ir.mab.booksreviews.settings.SettingsFragment;
+
 public class MainActivity extends AppCompatActivity {
     private Fragment scannerFrag = new ScannerFragment();
     private Fragment historyFag = new HistoryFragment();
