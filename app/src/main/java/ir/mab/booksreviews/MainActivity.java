@@ -10,9 +10,11 @@ import android.view.MenuItem;
 
 import ir.mab.booksreviews.history.HistoryFragment;
 import ir.mab.booksreviews.scanner.ScannerFragment;
+import ir.mab.booksreviews.scanner.ScannerPresenter;
 import ir.mab.booksreviews.settings.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
+    private ScannerPresenter scannerPresenter;
     private Fragment scannerFrag = new ScannerFragment();
     private Fragment historyFag = new HistoryFragment();
     private Fragment settingsFrag = new SettingsFragment();
@@ -41,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private void loadFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction1 = getSupportFragmentManager().beginTransaction();
         fragmentTransaction1.replace(R.id.frame_container,fragment);
-        fragmentTransaction1.addToBackStack(null);
         fragmentTransaction1.commit();
     }
 
@@ -52,7 +53,12 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         navView.setSelectedItemId(R.id.navigation_scan);
-
+        scannerPresenter = new ScannerPresenter();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        scannerPresenter.stop();
+    }
 }

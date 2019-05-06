@@ -19,13 +19,16 @@ import java.util.List;
 public class ScannerPresenter implements ScannerContract.Presenter {
 
     private ScannerContract.View mScannerView;
+    private Detector detector;
 
     ScannerPresenter(ScannerContract.View scannerView) {
         this.mScannerView = scannerView;
         scannerView.setPresenter(this);
     }
 
+    public ScannerPresenter(){
 
+    }
     @Override
     public FirebaseVisionImageMetadata getFirebaseVisionImageMetadata(int width, int height, int imageFormat) {
         return new FirebaseVisionImageMetadata.Builder()
@@ -49,7 +52,8 @@ public class ScannerPresenter implements ScannerContract.Presenter {
 
     @Override
     public void detectBarcode(FirebaseVisionImage image) {
-        new Detector(mScannerView,this).execute(image);
+        detector = new Detector(mScannerView,this);
+        detector.execute(image);
     }
 
     @Override
@@ -66,6 +70,13 @@ public class ScannerPresenter implements ScannerContract.Presenter {
         else {
             mScannerView.showPermissionDialog();
         }
+    }
+
+    @Override
+    public void stop() {
+        Log.d("AminStop","Stopped!");
+        if (detector != null)
+            detector.cancel(false);
     }
 
     private static FirebaseVisionBarcodeDetector getFirebaseVisionBarcodeDetector() {

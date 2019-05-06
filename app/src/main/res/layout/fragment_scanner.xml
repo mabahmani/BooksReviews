@@ -58,10 +58,11 @@
             android:text="@string/enableCamera"
             android:gravity="center"
             android:layout_gravity="center"
-            android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="#2196F3"
             android:padding="15dp"
+            android:textSize="18sp"
+
             />
     </LinearLayout>
 

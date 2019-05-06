@@ -2,8 +2,10 @@ package ir.mab.booksreviews.scanner;
 
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -61,6 +63,7 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
         });
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
     @Override
     public boolean hasPermissions() {
         return Objects.requireNonNull(getActivity()).checkSelfPermission(Manifest.permission.CAMERA)
@@ -101,6 +104,8 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
         super.onStart();
         presenter.start();
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
