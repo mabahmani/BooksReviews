@@ -28,5 +28,7 @@ public interface ScannerContract {
 
         void detectBarcode(FirebaseVisionImage image);
 
+        void enableCameraClicked();
+
     }
 }

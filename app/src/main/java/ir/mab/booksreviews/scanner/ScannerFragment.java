@@ -8,12 +8,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.Toast;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
@@ -30,9 +30,9 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
     private ScannerContract.Presenter mPresenter;
     private ScannerPresenter presenter;
-    private Camera camera;
-    private Preview preview;
     private FrameLayout livePreview;
+    private LinearLayout noPermissionLayout;
+    private TextView enableCamera;
 
     public ScannerFragment() {
         // Required empty public constructor
@@ -50,6 +50,15 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
 
         presenter = new ScannerPresenter(this);
         livePreview = view.findViewById(R.id.livePreview);
+        noPermissionLayout = view.findViewById(R.id.noPermissionLayout);
+        enableCamera = view.findViewById(R.id.enableCamera);
+
+        enableCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.enableCameraClicked();
+            }
+        });
     }
 
     @Override
@@ -65,8 +74,8 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
 
     @Override
     public void loadPreview() {
-        camera = presenter.getCameraInstance();
-        preview = new Preview(getContext(),camera);
+        Camera camera = presenter.getCameraInstance();
+        Preview preview = new Preview(getContext(), camera);
         livePreview.addView(preview);
 
         final int supportedWidth = camera.getParameters().getSupportedPreviewSizes().get(0).width;
@@ -99,11 +108,12 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
         if (requestCode == MY_PERMISSIONS_REQUEST_CAMERA){
             if (grantResults.length > 0
             && grantResults[0] == PackageManager.PERMISSION_GRANTED){
-                presenter.getCameraInstance();
+                noPermissionLayout.setVisibility(View.GONE);
+                presenter.start();
             }
 
             else {
-                Toast.makeText(getContext(),"onLoadNoPermissionsView",Toast.LENGTH_LONG).show();
+                noPermissionLayout.setVisibility(View.VISIBLE);
             }
         }
 

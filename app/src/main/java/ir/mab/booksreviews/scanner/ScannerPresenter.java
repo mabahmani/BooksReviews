@@ -53,6 +53,11 @@ public class ScannerPresenter implements ScannerContract.Presenter {
     }
 
     @Override
+    public void enableCameraClicked() {
+        mScannerView.showPermissionDialog();
+    }
+
+    @Override
     public void start() {
         if (mScannerView.hasPermissions()){
             mScannerView.loadPreview();

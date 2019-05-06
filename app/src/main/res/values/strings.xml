@@ -6,4 +6,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="cameraNeedPermission">این اپلیکیشن برای ادامه ی کار نیاز به مجوز دسترسی دوربین دارد!"</string>
+    <string name="cameraNeedPermissionSuggest">برای فعال کردن این دسترسی از گزینه زیر استفاده کنید، یا به تنظیمات گوشی مراجعه کنید."</string>
+    <string name="enableCamera">فعال کردن دسترسی دوربین"</string>
 </resources>
