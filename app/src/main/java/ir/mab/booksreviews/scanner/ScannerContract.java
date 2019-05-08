@@ -16,15 +16,13 @@ public interface ScannerContract {
 
         void showPermissionDialog();
 
+        void setupCamera();
+
         void loadPreview();
 
     }
 
     interface Presenter extends BasePresenter{
-
-        FirebaseVisionImageMetadata getFirebaseVisionImageMetadata(int width,int height,int imageFormat);
-
-        Camera getCameraInstance();
 
         void detectBarcode(FirebaseVisionImage image);
 

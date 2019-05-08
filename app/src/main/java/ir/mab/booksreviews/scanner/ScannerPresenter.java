@@ -1,6 +1,5 @@
 package ir.mab.booksreviews.scanner;
 
-import android.hardware.Camera;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -12,7 +11,6 @@ import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector;
 import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
-import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 
 import java.util.List;
 
@@ -29,26 +27,7 @@ public class ScannerPresenter implements ScannerContract.Presenter {
     public ScannerPresenter(){
 
     }
-    @Override
-    public FirebaseVisionImageMetadata getFirebaseVisionImageMetadata(int width, int height, int imageFormat) {
-        return new FirebaseVisionImageMetadata.Builder()
-                .setWidth(width)   // 480x360 is typically sufficient for
-                .setHeight(height)  // image recognition
-                .setFormat(imageFormat)
-                .build();
-    }
 
-    @Override
-    public Camera getCameraInstance() {
-        Camera c = null;
-        try {
-            c = Camera.open(); // attempt to get a Camera instance
-        }
-        catch (Exception e){
-            // Camera is not available (in use or does not exist)
-        }
-        return c; // returns null if camera is unavailable
-    }
 
     @Override
     public void detectBarcode(FirebaseVisionImage image) {
@@ -64,6 +43,7 @@ public class ScannerPresenter implements ScannerContract.Presenter {
     @Override
     public void start() {
         if (mScannerView.hasPermissions()){
+            mScannerView.setupCamera();
             mScannerView.loadPreview();
         }
 
@@ -90,7 +70,6 @@ public class ScannerPresenter implements ScannerContract.Presenter {
         return FirebaseVision.getInstance()
                 .getVisionBarcodeDetector(options);
     }
-
 
     static class Detector extends AsyncTask<FirebaseVisionImage,Boolean,Integer> {
 
