@@ -5,16 +5,33 @@ import java.util.List;
 public class VolumeInfo {
 
     private String title;
-    private List<Author> authors;
+    private List<String> authors;
     private String publishedDate;
     private String description;
     private int pageCount;
-    private List<Categorie> categories;
+    private List<String> categories;
     private int averageRating;
     private int ratingsCount;
     private List<ImageLink> imageLinks;
 
     public VolumeInfo() {
+    }
+
+
+    public List<String> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<String> authors) {
+        this.authors = authors;
+    }
+
+    public List<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
     }
 
     public String getTitle() {
@@ -23,14 +40,6 @@ public class VolumeInfo {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public List<Author> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
     }
 
     public String getPublishedDate() {
@@ -55,14 +64,6 @@ public class VolumeInfo {
 
     public void setPageCount(int pageCount) {
         this.pageCount = pageCount;
-    }
-
-    public List<Categorie> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(List<Categorie> categories) {
-        this.categories = categories;
     }
 
     public int getAverageRating() {
