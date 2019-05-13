@@ -54,9 +54,8 @@ public class ScannerPresenter implements ScannerContract.Presenter {
 
     @Override
     public void stop() {
-        Log.d("AminStop","Stopped!");
         if (detector != null)
-            detector.cancel(false);
+            detector.cancel(true);
     }
 
     private static FirebaseVisionBarcodeDetector getFirebaseVisionBarcodeDetector() {
@@ -83,27 +82,32 @@ public class ScannerPresenter implements ScannerContract.Presenter {
 
         @Override
         protected Integer doInBackground(FirebaseVisionImage... firebaseVisionImages) {
-            Log.d("BARCODE","do back");
-            getFirebaseVisionBarcodeDetector().detectInImage(firebaseVisionImages[0])
-                    .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionBarcode>>() {
-                        @Override
-                        public void onSuccess(List<FirebaseVisionBarcode> barcodes) {
-                            // Task completed successfully
-                            // ...
-                            for (FirebaseVisionBarcode barcode : barcodes){
-                                Log.d("BARCODE: ",barcode.getRawValue());
+            if (isCancelled()){
+                return null;
+            }
+            else {
+                Log.d("BARCODE", "do back");
+                getFirebaseVisionBarcodeDetector().detectInImage(firebaseVisionImages[0])
+                        .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionBarcode>>() {
+                            @Override
+                            public void onSuccess(List<FirebaseVisionBarcode> barcodes) {
+                                if (barcodes.size() > 0) {
+                                    presenter.stop();
+                                    view.releaseCameraAndPreview();
+                                    view.intentBookDeatilsActivity(barcodes.get(0).getRawValue());
+                                }
                             }
-                        }
-
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Task failed with an exception
-                            // ...
-                        }
-                    });
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Task failed with an exception
+                                // ...
+                            }
+                        });
+            }
             return null;
         }
+
     }
 }

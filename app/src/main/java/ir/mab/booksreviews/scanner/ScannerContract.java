@@ -20,6 +20,10 @@ public interface ScannerContract {
 
         void loadPreview();
 
+        void intentBookDeatilsActivity(String isbn);
+
+        void releaseCameraAndPreview();
+
     }
 
     interface Presenter extends BasePresenter{

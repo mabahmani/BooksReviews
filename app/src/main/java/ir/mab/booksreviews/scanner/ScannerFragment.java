@@ -3,6 +3,7 @@ package ir.mab.booksreviews.scanner;
 
 import android.Manifest;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Build;
@@ -23,6 +24,7 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 import java.util.Objects;
 
 import ir.mab.booksreviews.R;
+import ir.mab.booksreviews.book_detail.BookDetailsActivity;
 import ir.mab.booksreviews.utils.Preview;
 
 /**
@@ -84,6 +86,15 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
     }
 
     @Override
+    public void intentBookDeatilsActivity(String isbn) {
+        Intent intent = new Intent(getActivity(), BookDetailsActivity.class);
+
+        intent.putExtra("isbn",isbn);
+
+        startActivity(intent);
+    }
+
+    @Override
     public void setupCamera(){
 
         camera = getCameraInstance();
@@ -126,12 +137,10 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public void onResume() {
+        super.onResume();
         mPresenter.start();
     }
-
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -148,6 +157,22 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
             }
         }
 
+    }
+
+    @Override
+    public void releaseCameraAndPreview() {
+        preview = null;
+        camera.setPreviewCallback(null);
+        if (camera != null) {
+            camera.release();
+            camera = null;
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        releaseCameraAndPreview();
     }
 }
 
