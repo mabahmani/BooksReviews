@@ -172,7 +172,7 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
     @Override
     public void onDestroy() {
         super.onDestroy();
-        releaseCameraAndPreview();
+        //releaseCameraAndPreview();
     }
 }
 

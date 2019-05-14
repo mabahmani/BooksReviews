@@ -22,7 +22,6 @@ public class BookDetailsPresenter implements BookDetailsContract.Presenter , Boo
 
     @Override
     public void onFinished(BookDetails bookDetails) {
-        Log.d("onFinished: ", bookDetails.getItems().get(0).getVolumeInfo().getTitle());
         mView.setData(bookDetails);
     }
 

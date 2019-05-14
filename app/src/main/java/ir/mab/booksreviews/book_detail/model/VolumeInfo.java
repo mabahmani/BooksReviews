@@ -12,7 +12,7 @@ public class VolumeInfo {
     private List<String> categories;
     private int averageRating;
     private int ratingsCount;
-    private List<ImageLink> imageLinks;
+    private ImageLink imageLinks;
 
     public VolumeInfo() {
     }
@@ -82,11 +82,11 @@ public class VolumeInfo {
         this.ratingsCount = ratingsCount;
     }
 
-    public List<ImageLink> getImageLinks() {
+    public ImageLink getImageLinks() {
         return imageLinks;
     }
 
-    public void setImageLinks(List<ImageLink> imageLinks) {
+    public void setImageLinks(ImageLink imageLinks) {
         this.imageLinks = imageLinks;
     }
 }

@@ -33,5 +33,7 @@ dependencies {
     implementation 'com.appunity.retrofit2:adapter-guava:2.0.2'
     implementation 'com.appunity.retrofit2:converter-gson:2.0.2'
     implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
 }
 apply plugin: 'com.google.gms.google-services'
