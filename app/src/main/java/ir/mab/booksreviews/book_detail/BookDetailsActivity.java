@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +23,11 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
     private BookDetailsContract.FetchRemoteData fetchRemoteData;
     private BookDetails bookDetails;
 
-    private ImageView bookCover,bookThumb;
-    private TextView genere,bookName,author,pages,overallRating,pubDate,description;
+    private ImageView bookCover;
+    private ImageView bookThumb;
+    private TextView genre,bookName,author,pages,overallRating,pubDate,description;
+    private FrameLayout prog_back;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +52,15 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
     private void findView() {
         bookCover = findViewById(R.id.toolbarImage);
         bookThumb = findViewById(R.id.book_img);
-        genere = findViewById(R.id.genre);
+        genre = findViewById(R.id.genre);
         bookName = findViewById(R.id.book_name);
         author = findViewById(R.id.author);
         pages = findViewById(R.id.pages);
         overallRating = findViewById(R.id.overall_rating);
         pubDate = findViewById(R.id.pub_date);
         description = findViewById(R.id.description_txt);
+        prog_back = findViewById(R.id.progbar_back);
+        progressBar = findViewById(R.id.progbar);
     }
 
     @Override
@@ -81,13 +89,16 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
                     .into(bookThumb);
         }
 
-        genere.setText(bookDetails.getItems().get(0).getVolumeInfo().getCategories().get(0));
+        genre.setText(bookDetails.getItems().get(0).getVolumeInfo().getCategories().get(0));
         bookName.setText(bookDetails.getItems().get(0).getVolumeInfo().getTitle());
         author.setText(bookDetails.getItems().get(0).getVolumeInfo().getAuthors().get(0));
         pages.setText(String.valueOf(bookDetails.getItems().get(0).getVolumeInfo().getPageCount()));
         overallRating.setText(bookDetails.getItems().get(0).getVolumeInfo().getAverageRating()+"/5");
         pubDate.setText(String.valueOf(bookDetails.getItems().get(0).getVolumeInfo().getPublishedDate()));
         description.setText(bookDetails.getItems().get(0).getVolumeInfo().getDescription());
+
+        progressBar.setVisibility(View.INVISIBLE);
+        prog_back.setVisibility(View.INVISIBLE);
 
     }
 
