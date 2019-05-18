@@ -20,6 +20,8 @@ public class BookDetailsFetchRemoteData implements BookDetailsContract.FetchRemo
 
         Call<BookDetails> call = bookDetailsApi.getDetails(isbn);
 
+        Log.d("Retrofit",isbn+" "+call.request().url().toString());
+
         call.enqueue(new Callback<BookDetails>() {
             @Override
             public void onResponse(Call<BookDetails> call, Response<BookDetails> response) {
@@ -29,7 +31,7 @@ public class BookDetailsFetchRemoteData implements BookDetailsContract.FetchRemo
 
             @Override
             public void onFailure(Call<BookDetails> call, Throwable throwable) {
-                Log.d("Retrofit","onFailure: "+throwable.getCause());
+                Log.d("Retrofit","onFailure: "+throwable);
                 onFinishedListener.onFailure(throwable);
             }
         });

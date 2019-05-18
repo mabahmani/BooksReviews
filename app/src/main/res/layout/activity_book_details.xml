@@ -150,7 +150,7 @@
                 <TextView
                     android:id="@+id/author"
                     android:layout_width="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
                     android:layout_height="0dp"
                     android:textSize="14sp"
                     android:textColor="#DEDEDE"

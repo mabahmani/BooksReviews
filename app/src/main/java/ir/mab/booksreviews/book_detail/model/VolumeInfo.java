@@ -10,7 +10,7 @@ public class VolumeInfo {
     private String description;
     private int pageCount;
     private List<String> categories;
-    private int averageRating;
+    private float averageRating;
     private int ratingsCount;
     private ImageLink imageLinks;
 
@@ -66,11 +66,11 @@ public class VolumeInfo {
         this.pageCount = pageCount;
     }
 
-    public int getAverageRating() {
+    public float getAverageRating() {
         return averageRating;
     }
 
-    public void setAverageRating(int averageRating) {
+    public void setAverageRating(float averageRating) {
         this.averageRating = averageRating;
     }
 
