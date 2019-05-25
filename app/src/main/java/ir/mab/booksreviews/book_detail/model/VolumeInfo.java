@@ -8,6 +8,7 @@ public class VolumeInfo {
     private List<String> authors;
     private String publishedDate;
     private String description;
+    private List<ISBN> industryIdentifiers;
     private int pageCount;
     private List<String> categories;
     private float averageRating;
@@ -88,5 +89,13 @@ public class VolumeInfo {
 
     public void setImageLinks(ImageLink imageLinks) {
         this.imageLinks = imageLinks;
+    }
+
+    public List<ISBN> getIndustryIdentifiers() {
+        return industryIdentifiers;
+    }
+
+    public void setIndustryIdentifiers(List<ISBN> industryIdentifiers) {
+        this.industryIdentifiers = industryIdentifiers;
     }
 }

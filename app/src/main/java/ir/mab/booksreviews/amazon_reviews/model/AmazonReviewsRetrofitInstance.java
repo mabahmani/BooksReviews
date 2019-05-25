@@ -1,4 +1,4 @@
-package ir.mab.booksreviews.book_detail;
+package ir.mab.booksreviews.amazon_reviews.model;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -6,9 +6,9 @@ import com.google.gson.GsonBuilder;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class BookDetailsRetrofitInstance {
+public class AmazonReviewsRetrofitInstance {
 
-    private static final String BASE_URL = "https://www.googleapis.com/books/v1/";
+    private static final String BASE_URL = "https://bookreviewscrawler.herokuapp.com";
 
     Retrofit getInstance(){
         Gson gson = new GsonBuilder()
@@ -20,4 +20,5 @@ public class BookDetailsRetrofitInstance {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
     }
+
 }
