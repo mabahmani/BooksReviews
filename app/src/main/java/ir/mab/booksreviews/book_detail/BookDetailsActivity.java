@@ -25,7 +25,7 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
     private BookDetailsContract.FetchRemoteData fetchRemoteData;
     private BookDetails bookDetails;
 
-    private ImageView bookCover;
+    private ImageView bookCover,expand,collapse;
     private ImageView bookThumb;
     private TextView genre,bookName,author,pages,overallRating,pubDate,description;
     private FrameLayout prog_back;
@@ -62,6 +62,25 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
             }
         });
 
+
+        expand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                description.setMaxLines(Integer.MAX_VALUE);
+                expand.setVisibility(View.GONE);
+                collapse.setVisibility(View.VISIBLE);
+            }
+        });
+
+        collapse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                description.setMaxLines(4);
+                expand.setVisibility(View.VISIBLE);
+                collapse.setVisibility(View.GONE);
+            }
+        });
+
     }
 
     private void findView() {
@@ -79,6 +98,8 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
         amazon = findViewById(R.id.amazon);
         goodreads = findViewById(R.id.goodreads);
         fidibo = findViewById(R.id.fidibo);
+        expand = findViewById(R.id.expand_img);
+        collapse = findViewById(R.id.collapse_img);
     }
 
     @Override

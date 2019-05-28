@@ -273,13 +273,6 @@
                 android:layout_height="wrap_content"
                 android:text="Description"
                 android:layout_marginLeft="10dp" />
-            <ScrollView
-                android:id="@+id/text_scroll"
-                android:layout_width="match_parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/description"
-                android:layout_height="100dp">
 
                 <TextView
                     android:id="@+id/description_txt"
@@ -287,15 +280,35 @@
                     android:padding="10dp"
                     android:textSize="18sp"
                     android:layout_height="wrap_content"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:maxLines="4"
+                    app:layout_constraintTop_toBottomOf="@+id/description"
                     />
-            </ScrollView>
-            
+
+            <ImageView
+                android:id="@+id/expand_img"
+                android:layout_width="match_parent"
+                android:src="@drawable/ic_arrow_drop_down_black_24dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/description_txt"
+                app:layout_constraintBottom_toTopOf="@+id/amazon"
+                />
+
+            <ImageView
+                android:id="@+id/collapse_img"
+                android:layout_width="match_parent"
+                android:src="@drawable/ic_arrow_drop_up_black_24dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@+id/description_txt"
+                android:layout_height="wrap_content" />
+
             <android.support.v7.widget.CardView
                 android:id="@+id/amazon"
                 android:layout_width="match_parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_scroll"
+                app:layout_constraintTop_toBottomOf="@id/collapse_img"
                 android:layout_margin="10dp"
                 android:layout_height="wrap_content">
                 

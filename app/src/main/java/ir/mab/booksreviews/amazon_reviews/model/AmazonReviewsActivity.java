@@ -6,7 +6,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +26,9 @@ public class AmazonReviewsActivity extends AppCompatActivity implements AmazonRe
 
     private RecyclerView amazonReviewsList;
     private AmazonReviewsAdapter adapter;
+
+    private FrameLayout prog_back;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +50,8 @@ public class AmazonReviewsActivity extends AppCompatActivity implements AmazonRe
 
     private void findViews() {
         amazonReviewsList = findViewById(R.id.amazon_reviews_list);
+        prog_back = findViewById(R.id.progbar_back);
+        progressBar = findViewById(R.id.progbar);
     }
 
     @Override
@@ -61,6 +69,9 @@ public class AmazonReviewsActivity extends AppCompatActivity implements AmazonRe
         amazonReviewsList.setLayoutManager(new LinearLayoutManager(this));
         amazonReviewsList.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        progressBar.setVisibility(View.INVISIBLE);
+        prog_back.setVisibility(View.INVISIBLE);
     }
 
     @Override
