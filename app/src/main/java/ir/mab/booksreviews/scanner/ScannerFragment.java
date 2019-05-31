@@ -14,7 +14,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -39,6 +42,9 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
     private TextView enableCamera;
     private Camera camera;
     private Preview preview;
+    private ImageView viewFinder;
+    private LinearLayout barcodeScaneLine;
+
 
 
     public ScannerFragment() {
@@ -57,6 +63,8 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
 
         mPresenter = new ScannerPresenter(this);
         livePreview = view.findViewById(R.id.livePreview);
+        viewFinder = view.findViewById(R.id.viewFinder);
+        barcodeScaneLine = view.findViewById(R.id.barcodeScanLine);
         noPermissionLayout = view.findViewById(R.id.noPermissionLayout);
         enableCamera = view.findViewById(R.id.enableCamera);
         enableCamera.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +73,10 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
                 mPresenter.enableCameraClicked();
             }
         });
+
+        Animation blink = AnimationUtils.loadAnimation(getActivity(),R.anim.blink);
+        barcodeScaneLine.setAnimation(blink);
+        viewFinder.setAnimation(blink);
     }
 
     @TargetApi(Build.VERSION_CODES.M)

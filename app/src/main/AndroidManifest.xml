@@ -11,7 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
         <activity android:name=".amazon_reviews.model.AmazonReviewsActivity"></activity>
         <activity android:name=".goodreads_reviews.GoodreadsReviewsActivity"></activity>
         <activity android:name=".book_detail.BookDetailsActivity" />
