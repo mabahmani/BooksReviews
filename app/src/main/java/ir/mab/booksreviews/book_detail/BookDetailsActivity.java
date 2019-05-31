@@ -18,6 +18,7 @@ import com.squareup.picasso.Picasso;
 import ir.mab.booksreviews.R;
 import ir.mab.booksreviews.amazon_reviews.model.AmazonReviewsActivity;
 import ir.mab.booksreviews.book_detail.model.BookDetails;
+import ir.mab.booksreviews.goodreads_reviews.GoodreadsReviewsActivity;
 
 public class BookDetailsActivity extends AppCompatActivity implements BookDetailsContract.View{
 
@@ -58,6 +59,18 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
                         bookDetails.getItems().get(0)
                         .getVolumeInfo().getIndustryIdentifiers()
                         .get(1).getIdentifier());
+                startActivity(myIntent);
+            }
+        });
+
+        goodreads.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(BookDetailsActivity.this, GoodreadsReviewsActivity.class);
+                myIntent.putExtra("isbn10",
+                        bookDetails.getItems().get(0)
+                                .getVolumeInfo().getIndustryIdentifiers()
+                                .get(1).getIdentifier());
                 startActivity(myIntent);
             }
         });

@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".amazon_reviews.model.AmazonReviewsActivity"></activity>
+        <activity android:name=".goodreads_reviews.GoodreadsReviewsActivity"></activity>
         <activity android:name=".book_detail.BookDetailsActivity" />
         <activity
             android:name=".MainActivity"
