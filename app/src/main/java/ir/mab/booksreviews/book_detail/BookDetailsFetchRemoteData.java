@@ -3,12 +3,16 @@ package ir.mab.booksreviews.book_detail;
 import android.util.Log;
 
 import ir.mab.booksreviews.book_detail.model.BookDetails;
+import ir.mab.booksreviews.book_detail.model.FidiboBookDetails;
+import ir.mab.booksreviews.book_detail.model.FidiboBookId;
+import ir.mab.booksreviews.fidibo_reviews.FidiboReviewsRetrofitInstance;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BookDetailsFetchRemoteData implements BookDetailsContract.FetchRemoteData {
     private String isbn;
+    private String fidiboBookId;
     BookDetailsFetchRemoteData(String isbn){
         this.isbn = isbn;
     }
@@ -33,6 +37,50 @@ public class BookDetailsFetchRemoteData implements BookDetailsContract.FetchRemo
             public void onFailure(Call<BookDetails> call, Throwable throwable) {
                 Log.d("Retrofit","onFailure: "+throwable);
                 onFinishedListener.onFailure(throwable);
+            }
+        });
+    }
+
+
+    @Override
+    public void getFidiboBookId(final FidiboBookIdOnFinishedListener onFinishedListener) {
+        BookDetailsApi bookDetailsApi = new FidiboReviewsRetrofitInstance()
+                .getInstance().create(BookDetailsApi.class);
+
+        Call<FidiboBookId> call = bookDetailsApi.getFidiboBookId(isbn.replace("isbn:",""));
+        call.enqueue(new Callback<FidiboBookId>() {
+            @Override
+            public void onResponse(Call<FidiboBookId> call, Response<FidiboBookId> response) {
+                if (response.isSuccessful()){
+                    onFinishedListener.onFinished(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FidiboBookId> call, Throwable throwable) {
+                    onFinishedListener.onFailure(throwable);
+            }
+        });
+
+    }
+
+    @Override
+    public void getFidiboBookDetails(final FidiboBookDetailsOnFinishedListener onFinishedListener,String id) {
+        BookDetailsApi bookDetailsApi = new FidiboReviewsRetrofitInstance()
+                .getInstance().create(BookDetailsApi.class);
+
+        Call<FidiboBookDetails> call = bookDetailsApi.getFidiboBookDetails(id);
+        call.enqueue(new Callback<FidiboBookDetails>() {
+            @Override
+            public void onResponse(Call<FidiboBookDetails> call, Response<FidiboBookDetails> response) {
+                if (response.isSuccessful()){
+                    onFinishedListener.onFinished(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<FidiboBookDetails> call, Throwable throwable) {
+                    onFinishedListener.onFailure(throwable);
             }
         });
     }

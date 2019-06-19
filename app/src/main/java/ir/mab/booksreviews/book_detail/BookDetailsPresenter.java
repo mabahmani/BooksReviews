@@ -3,8 +3,13 @@ package ir.mab.booksreviews.book_detail;
 import android.util.Log;
 
 import ir.mab.booksreviews.book_detail.model.BookDetails;
+import ir.mab.booksreviews.book_detail.model.FidiboBookDetails;
+import ir.mab.booksreviews.book_detail.model.FidiboBookId;
 
-public class BookDetailsPresenter implements BookDetailsContract.Presenter , BookDetailsContract.FetchRemoteData.OnFinishedListener {
+public class BookDetailsPresenter implements BookDetailsContract.Presenter,
+        BookDetailsContract.FetchRemoteData.OnFinishedListener,
+        BookDetailsContract.FetchRemoteData.FidiboBookIdOnFinishedListener,
+        BookDetailsContract.FetchRemoteData.FidiboBookDetailsOnFinishedListener{
 
     private BookDetailsContract.View mView;
     private BookDetailsContract.FetchRemoteData fetchRemoteData;
@@ -21,8 +26,36 @@ public class BookDetailsPresenter implements BookDetailsContract.Presenter , Boo
     }
 
     @Override
+    public void start() {
+        fetchRemoteData.getFidiboBookId(this);
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
+    @Override
     public void onFinished(BookDetails bookDetails) {
         mView.setData(bookDetails);
+    }
+
+    @Override
+    public void onFinished(FidiboBookId fidiboBookId) {
+        if (fidiboBookId.getBookId() != null){
+            mView.setFidiboBookId(fidiboBookId);
+            fetchRemoteData.getFidiboBookDetails(this,fidiboBookId.getBookId());
+        }
+
+        else {
+            mView.getGoogle();
+        }
+    }
+
+    @Override
+    public void onFinished(FidiboBookDetails fidiboBookDetails) {
+        Log.d("START","start shod!"+ fidiboBookDetails.getBookName());
+        mView.setFidiboData(fidiboBookDetails);
     }
 
     @Override
@@ -30,13 +63,4 @@ public class BookDetailsPresenter implements BookDetailsContract.Presenter , Boo
 
     }
 
-    @Override
-    public void start() {
-
-    }
-
-    @Override
-    public void stop() {
-
-    }
 }

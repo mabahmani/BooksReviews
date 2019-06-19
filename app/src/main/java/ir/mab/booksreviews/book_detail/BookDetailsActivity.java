@@ -18,6 +18,8 @@ import com.squareup.picasso.Picasso;
 import ir.mab.booksreviews.R;
 import ir.mab.booksreviews.amazon_reviews.model.AmazonReviewsActivity;
 import ir.mab.booksreviews.book_detail.model.BookDetails;
+import ir.mab.booksreviews.book_detail.model.FidiboBookDetails;
+import ir.mab.booksreviews.book_detail.model.FidiboBookId;
 import ir.mab.booksreviews.goodreads_reviews.GoodreadsReviewsActivity;
 
 public class BookDetailsActivity extends AppCompatActivity implements BookDetailsContract.View{
@@ -25,6 +27,8 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
     private BookDetailsContract.Presenter mPresenter;
     private BookDetailsContract.FetchRemoteData fetchRemoteData;
     private BookDetails bookDetails;
+    private FidiboBookDetails fidiboBookDetails;
+    private FidiboBookId fidiboBookId;
 
     private ImageView bookCover,expand,collapse;
     private ImageView bookThumb;
@@ -48,8 +52,6 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
         fetchRemoteData = new BookDetailsFetchRemoteData(isbn);
 
         mPresenter = new BookDetailsPresenter(this,fetchRemoteData);
-
-        mPresenter.requestDataFromServer();
 
         amazon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +127,49 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
         else {
             Toast.makeText(this,"Failed!",Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void setFidiboData(FidiboBookDetails fidiboData) {
+        this.fidiboBookDetails = fidiboData;
+        if (fidiboData != null)
+            setFidiboViews();
+        else {
+            Toast.makeText(this,"Failed!",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void setFidiboViews() {
+        if (!fidiboBookDetails.getImage().equals("")) {
+            Picasso.get()
+                    .load(fidiboBookDetails.getImage())
+                    .into(bookCover);
+
+            Picasso.get()
+                    .load(fidiboBookDetails.getImage())
+                    .into(bookThumb);
+        }
+
+        //genre.setText(bookDetails.getItems().get(0).getVolumeInfo().getCategories().get(0));
+        bookName.setText(fidiboBookDetails.getBookName());
+        author.setText(fidiboBookDetails.getAuthor());
+        pages.setText(fidiboBookDetails.getPages());
+        //overallRating.setText(bookDetails.getItems().get(0).getVolumeInfo().getAverageRating()+"/5");
+        pubDate.setText(fidiboBookDetails.getDate());
+        description.setText(fidiboBookDetails.getDesc());
+
+        progressBar.setVisibility(View.INVISIBLE);
+        prog_back.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void setFidiboBookId(FidiboBookId fidiboBookId) {
+        this.fidiboBookId = fidiboBookId;
+    }
+
+    @Override
+    public void getGoogle() {
+        mPresenter.requestDataFromServer();
     }
 
     @SuppressLint("SetTextI18n")
