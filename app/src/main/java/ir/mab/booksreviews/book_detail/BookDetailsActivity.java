@@ -20,6 +20,7 @@ import ir.mab.booksreviews.amazon_reviews.model.AmazonReviewsActivity;
 import ir.mab.booksreviews.book_detail.model.BookDetails;
 import ir.mab.booksreviews.book_detail.model.FidiboBookDetails;
 import ir.mab.booksreviews.book_detail.model.FidiboBookId;
+import ir.mab.booksreviews.fidibo_reviews.FidiboReviewsActivity;
 import ir.mab.booksreviews.goodreads_reviews.GoodreadsReviewsActivity;
 
 public class BookDetailsActivity extends AppCompatActivity implements BookDetailsContract.View{
@@ -88,6 +89,32 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
     public void setFidiboData(FidiboBookDetails fidiboData) {
         setContentView(R.layout.activity_book_details_fa);
         findView();
+        expand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                description.setMaxLines(Integer.MAX_VALUE);
+                expand.setVisibility(View.GONE);
+                collapse.setVisibility(View.VISIBLE);
+            }
+        });
+
+        collapse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                description.setMaxLines(4);
+                expand.setVisibility(View.VISIBLE);
+                collapse.setVisibility(View.GONE);
+            }
+        });
+        fidibo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(BookDetailsActivity.this, FidiboReviewsActivity.class);
+                myIntent.putExtra("id", fidiboBookId.getBookId());
+                startActivity(myIntent);
+
+            }
+        });
         this.fidiboBookDetails = fidiboData;
         if (fidiboData != null)
             setFidiboViews();

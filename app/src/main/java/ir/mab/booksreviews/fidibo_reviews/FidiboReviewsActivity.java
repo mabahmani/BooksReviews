@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
@@ -40,6 +41,8 @@ public class FidiboReviewsActivity extends AppCompatActivity implements FidiboRe
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("id");
+
+        Log.d("FBOOKID",id);
 
         fetchRemoteData = new FidiboReviewsFetchRemoteData(id);
 
