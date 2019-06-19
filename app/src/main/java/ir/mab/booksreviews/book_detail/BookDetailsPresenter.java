@@ -37,6 +37,7 @@ public class BookDetailsPresenter implements BookDetailsContract.Presenter,
 
     @Override
     public void onFinished(BookDetails bookDetails) {
+        Log.d("BOOKDetails",bookDetails.getItems().size()+"");
         mView.setData(bookDetails);
     }
 
@@ -48,6 +49,7 @@ public class BookDetailsPresenter implements BookDetailsContract.Presenter,
         }
 
         else {
+            Log.d("GOOGLE","ARE GOOGLE!");
             mView.getGoogle();
         }
     }

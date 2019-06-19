@@ -40,9 +40,7 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_details);
-
-        findView();
+        setContentView(R.layout.activity_book_details_fa);
 
         Intent intent = getIntent();
         String isbn = intent.getStringExtra("isbn");
@@ -52,49 +50,6 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
         fetchRemoteData = new BookDetailsFetchRemoteData(isbn);
 
         mPresenter = new BookDetailsPresenter(this,fetchRemoteData);
-
-        amazon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(BookDetailsActivity.this, AmazonReviewsActivity.class);
-                myIntent.putExtra("isbn10",
-                        bookDetails.getItems().get(0)
-                        .getVolumeInfo().getIndustryIdentifiers()
-                        .get(1).getIdentifier());
-                startActivity(myIntent);
-            }
-        });
-
-        goodreads.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent myIntent = new Intent(BookDetailsActivity.this, GoodreadsReviewsActivity.class);
-                myIntent.putExtra("isbn10",
-                        bookDetails.getItems().get(0)
-                                .getVolumeInfo().getIndustryIdentifiers()
-                                .get(1).getIdentifier());
-                startActivity(myIntent);
-            }
-        });
-
-
-        expand.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                description.setMaxLines(Integer.MAX_VALUE);
-                expand.setVisibility(View.GONE);
-                collapse.setVisibility(View.VISIBLE);
-            }
-        });
-
-        collapse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                description.setMaxLines(4);
-                expand.setVisibility(View.VISIBLE);
-                collapse.setVisibility(View.GONE);
-            }
-        });
 
     }
 
@@ -131,6 +86,8 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
 
     @Override
     public void setFidiboData(FidiboBookDetails fidiboData) {
+        setContentView(R.layout.activity_book_details_fa);
+        findView();
         this.fidiboBookDetails = fidiboData;
         if (fidiboData != null)
             setFidiboViews();
@@ -154,7 +111,7 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
         bookName.setText(fidiboBookDetails.getBookName());
         author.setText(fidiboBookDetails.getAuthor());
         pages.setText(fidiboBookDetails.getPages());
-        //overallRating.setText(bookDetails.getItems().get(0).getVolumeInfo().getAverageRating()+"/5");
+        overallRating.setText(fidiboBookDetails.getPublisher());
         pubDate.setText(fidiboBookDetails.getDate());
         description.setText(fidiboBookDetails.getDesc());
 
@@ -169,6 +126,51 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
 
     @Override
     public void getGoogle() {
+        setContentView(R.layout.activity_book_details);
+        findView();
+        amazon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(BookDetailsActivity.this, AmazonReviewsActivity.class);
+                myIntent.putExtra("isbn10",
+                        bookDetails.getItems().get(0)
+                                .getVolumeInfo().getIndustryIdentifiers()
+                                .get(1).getIdentifier());
+                startActivity(myIntent);
+            }
+        });
+
+        goodreads.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(BookDetailsActivity.this, GoodreadsReviewsActivity.class);
+                myIntent.putExtra("isbn10",
+                        bookDetails.getItems().get(0)
+                                .getVolumeInfo().getIndustryIdentifiers()
+                                .get(1).getIdentifier());
+                startActivity(myIntent);
+            }
+        });
+
+
+        expand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                description.setMaxLines(Integer.MAX_VALUE);
+                expand.setVisibility(View.GONE);
+                collapse.setVisibility(View.VISIBLE);
+            }
+        });
+
+        collapse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                description.setMaxLines(4);
+                expand.setVisibility(View.VISIBLE);
+                collapse.setVisibility(View.GONE);
+            }
+        });
+
         mPresenter.requestDataFromServer();
     }
 
@@ -196,6 +198,8 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
 
         progressBar.setVisibility(View.INVISIBLE);
         prog_back.setVisibility(View.INVISIBLE);
+
+        Log.d("IMGAE_LINK",bookDetails.getItems().get(0).getVolumeInfo().getImageLinks().getThumbnail());
 
     }
 

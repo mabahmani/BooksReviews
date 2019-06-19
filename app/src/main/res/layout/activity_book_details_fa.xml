@@ -46,11 +46,11 @@
     <android.support.v7.widget.CardView
         android:layout_width="120dp"
         app:layout_anchor="@id/appBar"
-        app:layout_anchorGravity="bottom|start"
+        app:layout_anchorGravity="bottom|end"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="20dp"
         android:layout_height="150dp">
 
@@ -78,12 +78,11 @@
                 android:layout_width="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
                 android:orientation="vertical"
                 android:layout_height="0dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginLeft="120dp"
-                android:layout_marginStart="120dp"
+                android:layout_marginRight="150dp"
+                android:layout_marginEnd="150dp"
                 >
 
                 <TextView
@@ -98,15 +97,21 @@
                     android:layout_height="0dp"
                     android:layout_weight="2"
                     android:padding="5dp"
+                    android:text="رمان"
+                    android:layoutDirection="rtl"
+                    android:layout_gravity="end"
                     />
 
                 <TextView
                     android:id="@+id/book_name"
                     android:layout_width="wrap_content"
+                    android:textDirection="rtl"
+                    android:layoutDirection="rtl"
+                    android:layout_gravity="end"
                     android:layout_height="0dp"
                     android:layout_weight="2"
                     android:textSize="24sp"
-                    android:maxLines="2"
+                    android:maxLines="1"
                     android:textStyle="bold"
                     android:textColor="#141414"
                     />
@@ -115,6 +120,8 @@
                     android:layout_width="100dp"
                     android:layout_weight="1"
                     android:orientation="horizontal"
+                    android:layoutDirection="rtl"
+                    android:layout_gravity="end"
                     android:layout_height="0dp">
 
                     <ImageView
@@ -189,7 +196,7 @@
                         />
 
                     <TextView
-                        android:text="Pages"
+                        android:text="صفحه"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_weight="1"
@@ -219,7 +226,7 @@
                         />
 
                     <TextView
-                        android:text="Overall Rating"
+                        android:text="ناشر"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_weight="1"
@@ -248,7 +255,7 @@
                         />
 
                     <TextView
-                        android:text="PubDate"
+                        android:text="تاریخ انتشار"
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_weight="1"
@@ -265,15 +272,16 @@
             <TextView
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/book_details_box_2"
                 android:textStyle="bold"
                 android:textSize="24sp"
                 android:textColor="#141414"
-                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_height="wrap_content"
-                android:text="Description"
-                android:layout_marginLeft="10dp" />
+                android:gravity="end"
+                android:text="توضیحات"
+                android:layout_marginRight="10dp" />
 
                 <TextView
                     android:id="@+id/description_txt"
