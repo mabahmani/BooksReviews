@@ -33,7 +33,7 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
 
     private ImageView bookCover,expand,collapse;
     private ImageView bookThumb;
-    private TextView genre,bookName,author,pages,overallRating,pubDate,description;
+    private TextView genre,bookName,author,pages,overallRating,pubDate,description,bookNotFound;
     private FrameLayout prog_back;
     private ProgressBar progressBar;
     private CardView amazon,goodreads,fidibo;
@@ -71,6 +71,7 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
         fidibo = findViewById(R.id.fidibo);
         expand = findViewById(R.id.expand_img);
         collapse = findViewById(R.id.collapse_img);
+        bookNotFound = findViewById(R.id.bookNotFound);
     }
 
     @Override
@@ -81,6 +82,8 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
         if (bookDetails.getTotalItems() > 0)
             setViews();
         else {
+            progressBar.setVisibility(View.INVISIBLE);
+            bookNotFound.setVisibility(View.VISIBLE);
             Toast.makeText(this,"Failed!",Toast.LENGTH_LONG).show();
         }
     }
@@ -147,8 +150,15 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
     }
 
     @Override
-    public void setFidiboBookId(FidiboBookId fidiboBookId) {
-        this.fidiboBookId = fidiboBookId;
+    public void setFidiboBookId(FidiboBookId fidiboBookId)
+    {
+        if (fidiboBookId != null) {
+            Toast.makeText(getApplicationContext(), "Fidibo ID:" + fidiboBookId.getBookId(), Toast.LENGTH_LONG).show();
+            this.fidiboBookId = fidiboBookId;
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "Fidibo ID: Not Found!" , Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

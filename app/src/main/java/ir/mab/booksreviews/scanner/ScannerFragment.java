@@ -174,8 +174,8 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
     @Override
     public void releaseCameraAndPreview() {
         preview = null;
-        camera.setPreviewCallback(null);
         if (camera != null) {
+            camera.setPreviewCallback(null);
             camera.release();
             camera = null;
         }

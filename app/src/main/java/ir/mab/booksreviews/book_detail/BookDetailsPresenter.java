@@ -37,7 +37,7 @@ public class BookDetailsPresenter implements BookDetailsContract.Presenter,
 
     @Override
     public void onFinished(BookDetails bookDetails) {
-        Log.d("BOOKDetails",bookDetails.getItems().size()+"");
+        //Log.d("BOOKDetails",bookDetails.getItems().size()+"");
         mView.setData(bookDetails);
     }
 
