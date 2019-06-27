@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import ir.mab.booksreviews.MainActivity;
 import ir.mab.booksreviews.R;
 import ir.mab.booksreviews.amazon_reviews.model.AmazonReviewsActivity;
 import ir.mab.booksreviews.book_detail.model.BookDetails;
@@ -249,5 +250,13 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
     protected void onResume() {
         super.onResume();
         mPresenter.start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

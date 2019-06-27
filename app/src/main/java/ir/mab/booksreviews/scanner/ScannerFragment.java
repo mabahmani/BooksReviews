@@ -104,6 +104,9 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
         intent.putExtra("isbn",isbn);
 
         startActivity(intent);
+
+        getActivity().finish();
+
     }
 
     @Override
