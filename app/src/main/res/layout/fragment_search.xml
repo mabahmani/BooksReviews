@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".search.SearchFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/searchBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="جستجوی کتاب ..."
+            android:padding="10dp"
+            android:paddingRight="30dp"
+            android:textDirection="rtl"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/edit_bg"
+            android:drawableStart="@drawable/ic_search_black_24dp"
+            android:elevation="10dp"
+            android:drawableLeft="@drawable/ic_search_black_24dp"
+            android:paddingEnd="30dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginRight="30dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="نتیجه"
+                android:textStyle="bold"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/searchCount"
+                android:layout_width="0dp"
+                android:layout_weight="0.2"
+                android:text="30"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="#ffe082"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+<!--
+
+        <ImageView
+            android:id="@+id/searchBg"
+            android:layout_width="256dp"
+            android:src="@drawable/search"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:visibility="gone"
+            android:layout_height="256dp" />
+-->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/booksList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+</FrameLayout>

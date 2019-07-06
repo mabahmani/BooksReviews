@@ -11,13 +11,13 @@ import android.view.MenuItem;
 import ir.mab.booksreviews.history.HistoryFragment;
 import ir.mab.booksreviews.scanner.ScannerFragment;
 import ir.mab.booksreviews.scanner.ScannerPresenter;
-import ir.mab.booksreviews.settings.SettingsFragment;
+import ir.mab.booksreviews.search.SearchFragment;
 
 public class MainActivity extends AppCompatActivity {
     private ScannerPresenter scannerPresenter;
     private Fragment scannerFrag = new ScannerFragment();
     private Fragment historyFag = new HistoryFragment();
-    private Fragment settingsFrag = new SettingsFragment();
+    private Fragment searchFrag = new SearchFragment();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
                     loadFragment(scannerFrag);
                     return true;
                 }
-                case R.id.navigation_settings:
-                    loadFragment(settingsFrag);
+                case R.id.navigation_search:
+                    loadFragment(searchFrag);
                     return true;
             }
             return false;
