@@ -2,6 +2,7 @@ package ir.mab.booksreviews.search.Adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         this.books = books;
     }
 
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
 
     @NonNull
     @Override
@@ -33,6 +37,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.ViewHolder viewHolder, int i) {
+        Log.d("AminAdapt",books.get(i).getTitle());
         Picasso.get().load(books.get(i).getPicture_url()).into(viewHolder.image);
         viewHolder.title.setText(books.get(i).getTitle());
         viewHolder.cat.setText(books.get(i).getCategory());

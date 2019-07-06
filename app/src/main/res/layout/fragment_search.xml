@@ -56,7 +56,6 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-<!--
 
         <ImageView
             android:id="@+id/searchBg"
@@ -66,7 +65,6 @@
             android:layout_marginTop="50dp"
             android:visibility="gone"
             android:layout_height="256dp" />
--->
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/booksList"

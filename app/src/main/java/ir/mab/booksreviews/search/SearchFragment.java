@@ -40,7 +40,7 @@ public class SearchFragment extends Fragment implements  SearchContract.View{
     private SearchAdapter searchAdapter;
     private EditText searchBox;
     private TextView searchCount;
-    //private ImageView searchBg;
+    private ImageView searchBg;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -89,7 +89,7 @@ public class SearchFragment extends Fragment implements  SearchContract.View{
         recyclerView = view.findViewById(R.id.booksList);
         searchBox = view.findViewById(R.id.searchBox);
         searchCount = view.findViewById(R.id.searchCount);
-        //searchBg = view.findViewById(R.id.searchBg);
+        searchBg = view.findViewById(R.id.searchBg);
     }
 
 
@@ -98,14 +98,15 @@ public class SearchFragment extends Fragment implements  SearchContract.View{
         this.books.clear();
         this.books = searchResponse.getBooks();
 
+        searchAdapter.setBooks(this.books);
         searchAdapter.notifyDataSetChanged();
 
         if (books.size() > 0) {
-            //searchBg.setVisibility(View.GONE);
+            searchBg.setVisibility(View.GONE);
             searchCount.setText(String.valueOf(books.size()));
         }
         else {
-            //searchBg.setVisibility(View.VISIBLE);
+            searchBg.setVisibility(View.VISIBLE);
             searchCount.setText("0");
         }
     }
