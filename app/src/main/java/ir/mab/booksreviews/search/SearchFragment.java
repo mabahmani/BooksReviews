@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class SearchFragment extends Fragment implements  SearchContract.View{
     private EditText searchBox;
     private TextView searchCount;
     private ImageView searchBg;
+    private ProgressBar progressBar;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -56,7 +58,7 @@ public class SearchFragment extends Fragment implements  SearchContract.View{
 
         final SearchPresenter searchPresenter = new SearchPresenter(this);
 
-        searchAdapter = new SearchAdapter(books);
+        searchAdapter = new SearchAdapter(books,getContext());
         initRecyclerView();
 
         searchCount.setText("0");
@@ -69,12 +71,16 @@ public class SearchFragment extends Fragment implements  SearchContract.View{
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                Title title = new Title();
-                title.setTitle(s.toString());
-                fetchRemoteData = new SearchFetchRemoteData(title);
-                searchPresenter.setFetchRemoteData(fetchRemoteData);
-                presenter = searchPresenter;
-                presenter.requestDataFromServer();
+                if(s.length() > 3) {
+                    progressBar.setVisibility(View.VISIBLE);
+                    searchBg.setVisibility(View.GONE);
+                    Title title = new Title();
+                    title.setTitle(s.toString());
+                    fetchRemoteData = new SearchFetchRemoteData(title);
+                    searchPresenter.setFetchRemoteData(fetchRemoteData);
+                    presenter = searchPresenter;
+                    presenter.requestDataFromServer();
+                }
             }
 
             @Override
@@ -90,6 +96,7 @@ public class SearchFragment extends Fragment implements  SearchContract.View{
         searchBox = view.findViewById(R.id.searchBox);
         searchCount = view.findViewById(R.id.searchCount);
         searchBg = view.findViewById(R.id.searchBg);
+        progressBar = view.findViewById(R.id.progress);
     }
 
 
@@ -103,6 +110,7 @@ public class SearchFragment extends Fragment implements  SearchContract.View{
 
         if (books.size() > 0) {
             searchBg.setVisibility(View.GONE);
+            progressBar.setVisibility(View.INVISIBLE);
             searchCount.setText(String.valueOf(books.size()));
         }
         else {

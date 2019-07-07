@@ -1,39 +1,76 @@
 package ir.mab.booksreviews.book_detail.model;
 
 public class FidiboBookDetails {
-    private String bookName;
-    private String author;
-    private String desc;
+
+    private int id;
+    private int fidibo_id;
+    private String ISBN;
+    private String title;
+    private String category;
+    private float rating;
+    private String release_date;
     private String publisher;
-    private String date;
-    private String pages;
-    private String image;
+    private int pages;
+    private String picture_url;
+    private String description;
 
     public FidiboBookDetails() {
     }
 
-    public String getBookName() {
-        return bookName;
+    public int getId() {
+        return id;
     }
 
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getAuthor() {
-        return author;
+    public int getFidibo_id() {
+        return fidibo_id;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setFidibo_id(int fidibo_id) {
+        this.fidibo_id = fidibo_id;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getISBN() {
+        return ISBN;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setISBN(String ISBN) {
+        this.ISBN = ISBN;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
+    }
+
+    public String getRelease_date() {
+        return release_date;
+    }
+
+    public void setRelease_date(String release_date) {
+        this.release_date = release_date;
     }
 
     public String getPublisher() {
@@ -44,27 +81,27 @@ public class FidiboBookDetails {
         this.publisher = publisher;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getPages() {
+    public int getPages() {
         return pages;
     }
 
-    public void setPages(String pages) {
+    public void setPages(int pages) {
         this.pages = pages;
     }
 
-    public String getImage() {
-        return image;
+    public String getPicture_url() {
+        return picture_url;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setPicture_url(String picture_url) {
+        this.picture_url = picture_url;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

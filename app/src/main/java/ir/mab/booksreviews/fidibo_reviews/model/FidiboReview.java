@@ -1,38 +1,29 @@
 package ir.mab.booksreviews.fidibo_reviews.model;
 
 public class FidiboReview {
-    private String username;
-    //private String title;
-    //private String rate;
+    private int book_id;
+    private String sender;
     private String date;
-    private String text;
+    private String content;
 
     public FidiboReview() {
     }
 
-    public String getName() {
-        return username;
+    public int getBook_id() {
+        return book_id;
     }
 
-    public void setName(String name) {
-        this.username = name;
+    public void setBook_id(int book_id) {
+        this.book_id = book_id;
     }
 
-/*    public String getTitle() {
-        return title;
+    public String getSender() {
+        return sender;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }*/
-
-/*    public String getRate() {
-        return rate;
+    public void setSender(String sender) {
+        this.sender = sender;
     }
-
-    public void setRate(String rate) {
-        this.rate = rate;
-    }*/
 
     public String getDate() {
         return date;
@@ -42,11 +33,11 @@ public class FidiboReview {
         this.date = date;
     }
 
-    public String getText() {
-        return text;
+    public String getContent() {
+        return content;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setContent(String content) {
+        this.content = content;
     }
 }

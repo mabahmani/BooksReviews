@@ -1,16 +1,16 @@
 package ir.mab.booksreviews.book_detail.model;
 
 public class FidiboBookId {
-    private String bookId;
+    private int book_id;
 
     public FidiboBookId() {
     }
 
-    public String getBookId() {
-        return bookId;
+    public int getBookId() {
+        return book_id;
     }
 
-    public void setBookId(String bookId) {
-        this.bookId = bookId;
+    public void setBookId(int bookId) {
+        this.book_id = bookId;
     }
 }

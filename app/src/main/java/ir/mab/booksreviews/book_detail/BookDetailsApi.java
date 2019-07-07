@@ -17,6 +17,6 @@ public interface BookDetailsApi {
     @GET("getBookId/{isbn}")
     Call<FidiboBookId> getFidiboBookId(@Path("isbn") String isbn);
 
-    @GET("getBook/{id}")
-    Call<FidiboBookDetails> getFidiboBookDetails(@Path("id") String id);
+    @GET("books/{isbn}")
+    Call<FidiboBookDetails> getFidiboBookDetails(@Path("isbn") String isbn);
 }

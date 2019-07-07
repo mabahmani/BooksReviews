@@ -48,10 +48,13 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
         String isbn = intent.getStringExtra("isbn");
         isbn = "isbn:"+ isbn;
 
-        Toast.makeText(this,isbn,Toast.LENGTH_LONG).show();
+        //Toast.makeText(this,isbn,Toast.LENGTH_LONG).show();
         fetchRemoteData = new BookDetailsFetchRemoteData(isbn);
 
         mPresenter = new BookDetailsPresenter(this,fetchRemoteData);
+
+        mPresenter.start();
+
 
     }
 
@@ -85,7 +88,7 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
         else {
             progressBar.setVisibility(View.INVISIBLE);
             bookNotFound.setVisibility(View.VISIBLE);
-            Toast.makeText(this,"Failed!",Toast.LENGTH_LONG).show();
+            //Toast.makeText(this,"Failed!",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -123,28 +126,28 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
         if (fidiboData != null)
             setFidiboViews();
         else {
-            Toast.makeText(this,"Failed!",Toast.LENGTH_LONG).show();
+            //Toast.makeText(this,"Failed!",Toast.LENGTH_LONG).show();
         }
     }
 
     private void setFidiboViews() {
-        if (!fidiboBookDetails.getImage().equals("")) {
+        if (!fidiboBookDetails.getPicture_url().equals("")) {
             Picasso.get()
-                    .load(fidiboBookDetails.getImage())
+                    .load(fidiboBookDetails.getPicture_url())
                     .into(bookCover);
 
             Picasso.get()
-                    .load(fidiboBookDetails.getImage())
+                    .load(fidiboBookDetails.getPicture_url())
                     .into(bookThumb);
         }
 
-        //genre.setText(bookDetails.getItems().get(0).getVolumeInfo().getCategories().get(0));
-        bookName.setText(fidiboBookDetails.getBookName());
-        author.setText(fidiboBookDetails.getAuthor());
-        pages.setText(fidiboBookDetails.getPages());
+        genre.setText(fidiboBookDetails.getCategory());
+        bookName.setText(fidiboBookDetails.getTitle());
+        //author.setText(fidiboBookDetails.get());
+        pages.setText(String.valueOf(fidiboBookDetails.getPages()));
         overallRating.setText(fidiboBookDetails.getPublisher());
-        pubDate.setText(fidiboBookDetails.getDate());
-        description.setText(fidiboBookDetails.getDesc());
+        pubDate.setText(fidiboBookDetails.getRelease_date());
+        description.setText(fidiboBookDetails.getDescription());
 
         progressBar.setVisibility(View.INVISIBLE);
         prog_back.setVisibility(View.INVISIBLE);
@@ -154,11 +157,11 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
     public void setFidiboBookId(FidiboBookId fidiboBookId)
     {
         if (fidiboBookId != null) {
-            Toast.makeText(getApplicationContext(), "Fidibo ID:" + fidiboBookId.getBookId(), Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Fidibo ID:" + fidiboBookId.getBookId(), Toast.LENGTH_LONG).show();
             this.fidiboBookId = fidiboBookId;
         }
         else {
-            Toast.makeText(getApplicationContext(), "Fidibo ID: Not Found!" , Toast.LENGTH_LONG).show();
+           // Toast.makeText(getApplicationContext(), "Fidibo ID: Not Found!" , Toast.LENGTH_LONG).show();
         }
     }
 
@@ -249,8 +252,9 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
     @Override
     protected void onResume() {
         super.onResume();
-        mPresenter.start();
     }
+
+
 
     @Override
     public void onBackPressed() {

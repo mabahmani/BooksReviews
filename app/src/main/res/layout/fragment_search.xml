@@ -59,17 +59,25 @@
 
         <ImageView
             android:id="@+id/searchBg"
-            android:layout_width="256dp"
+            android:layout_width="128dp"
             android:src="@drawable/search"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:visibility="gone"
-            android:layout_height="256dp" />
+            android:layout_marginTop="150dp"
+            android:visibility="visible"
+            android:layout_height="128dp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/booksList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
+
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:layout_height="wrap_content" />
 
 </FrameLayout>

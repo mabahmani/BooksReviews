@@ -32,9 +32,9 @@ public class FidiboReviewsAdapter extends RecyclerView.Adapter<FidiboReviewsAdap
 
     @Override
     public void onBindViewHolder(@NonNull final FidiboReviewsAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.userName.setText(fidiboReviews.get(i).getName());
+        viewHolder.userName.setText(fidiboReviews.get(i).getSender());
         viewHolder.date.setText(fidiboReviews.get(i).getDate());
-        viewHolder.text.setText(fidiboReviews.get(i).getText());
+        viewHolder.text.setText(fidiboReviews.get(i).getContent());
 
         viewHolder.expand.setOnClickListener(new View.OnClickListener() {
             @Override

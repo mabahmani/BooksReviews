@@ -42,7 +42,7 @@ public class BookDetailsFetchRemoteData implements BookDetailsContract.FetchRemo
     }
 
 
-    @Override
+/*    @Override
     public void getFidiboBookId(final FidiboBookIdOnFinishedListener onFinishedListener) {
         BookDetailsApi bookDetailsApi = new FidiboReviewsRetrofitInstance()
                 .getInstance().create(BookDetailsApi.class);
@@ -62,20 +62,18 @@ public class BookDetailsFetchRemoteData implements BookDetailsContract.FetchRemo
             }
         });
 
-    }
+    }*/
 
     @Override
-    public void getFidiboBookDetails(final FidiboBookDetailsOnFinishedListener onFinishedListener,String id) {
+    public void getFidiboBookDetails(final FidiboBookDetailsOnFinishedListener onFinishedListener) {
         BookDetailsApi bookDetailsApi = new FidiboReviewsRetrofitInstance()
                 .getInstance().create(BookDetailsApi.class);
 
-        Call<FidiboBookDetails> call = bookDetailsApi.getFidiboBookDetails(id);
+        Call<FidiboBookDetails> call = bookDetailsApi.getFidiboBookDetails(isbn.replace("isbn:",""));
         call.enqueue(new Callback<FidiboBookDetails>() {
             @Override
             public void onResponse(Call<FidiboBookDetails> call, Response<FidiboBookDetails> response) {
-                if (response.isSuccessful()){
                     onFinishedListener.onFinished(response.body());
-                }
             }
 
             @Override

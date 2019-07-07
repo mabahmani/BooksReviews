@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -24,11 +25,16 @@ import android.widget.TextView;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Objects;
 
 import ir.mab.booksreviews.R;
 import ir.mab.booksreviews.book_detail.BookDetailsActivity;
+import ir.mab.booksreviews.history.Barcode;
+import ir.mab.booksreviews.history.BarcodeList;
 import ir.mab.booksreviews.utils.Preview;
+import ir.mab.booksreviews.utils.SharedPref;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -99,6 +105,14 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
 
     @Override
     public void intentBookDeatilsActivity(String isbn) {
+        Barcode barcode = new Barcode();
+        barcode.setIsbn(isbn);
+        Date currentTime = Calendar.getInstance().getTime();
+        barcode.setDate(currentTime);
+        BarcodeList barcodeList = SharedPref.getInstance(getActivity()).getBarcodeList();
+        barcodeList.addBarcode(barcode);
+        SharedPref.getInstance(getActivity()).putBarcodeList(barcodeList);
+
         Intent intent = new Intent(getActivity(), BookDetailsActivity.class);
 
         intent.putExtra("isbn",isbn);

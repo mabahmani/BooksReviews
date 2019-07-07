@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ir.mab.booksreviews.R;
+import ir.mab.booksreviews.book_detail.model.FidiboBookId;
 import ir.mab.booksreviews.fidibo_reviews.Adapter.FidiboReviewsAdapter;
 import ir.mab.booksreviews.fidibo_reviews.model.FidiboReview;
 import ir.mab.booksreviews.goodreads_reviews.Adapter.GoodreadsReviewsAdapter;
@@ -40,11 +41,11 @@ public class FidiboReviewsActivity extends AppCompatActivity implements FidiboRe
         findViews();
 
         Intent intent = getIntent();
-        String id = intent.getStringExtra("id");
+        int id = intent.getIntExtra("id",0);
 
-        Log.d("FBOOKID",id);
-
-        fetchRemoteData = new FidiboReviewsFetchRemoteData(id);
+        FidiboBookId fidiboBookId = new FidiboBookId();
+        fidiboBookId.setBookId(Integer.valueOf(id));
+        fetchRemoteData = new FidiboReviewsFetchRemoteData(fidiboBookId);
 
         presenter = new FidiboReviewsPresenter(this,fetchRemoteData);
 

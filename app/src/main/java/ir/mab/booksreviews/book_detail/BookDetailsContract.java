@@ -32,10 +32,6 @@ public interface BookDetailsContract {
             void onFailure(Throwable t);
         }
 
-        interface FidiboBookIdOnFinishedListener{
-            void onFinished(FidiboBookId fidiboBookId);
-            void onFailure(Throwable t);
-        }
 
         interface FidiboBookDetailsOnFinishedListener{
             void onFinished(FidiboBookDetails fidiboBookDetails);
@@ -43,7 +39,6 @@ public interface BookDetailsContract {
         }
 
         void getBookDetails (OnFinishedListener onFinishedListener);
-        void getFidiboBookId(FidiboBookIdOnFinishedListener onFinishedListener);
-        void getFidiboBookDetails(FidiboBookDetailsOnFinishedListener onFinishedListener,String id);
+        void getFidiboBookDetails(FidiboBookDetailsOnFinishedListener onFinishedListener);
     }
 }

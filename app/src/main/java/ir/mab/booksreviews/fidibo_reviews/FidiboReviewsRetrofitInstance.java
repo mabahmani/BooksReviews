@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FidiboReviewsRetrofitInstance {
 
-    private static final String BASE_URL = "https://aminmab1.herokuapp.com";
+    private static final String BASE_URL = "http://fidibo.herokuapp.com";
 
     public Retrofit getInstance(){
         Gson gson = new GsonBuilder()

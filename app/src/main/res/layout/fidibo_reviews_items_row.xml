@@ -8,28 +8,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
         android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
+            android:gravity="end"
             android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/user_pic"
-                android:layout_width="0dp"
-                android:layout_weight="3"
+                android:layout_width="80dp"
                 android:layout_margin="5dp"
                 android:src="@drawable/fidibo"
-                android:layout_height="80dp" />
-
-            <TextView
-                android:id="@+id/user_name"
-                android:layout_width="0dp"
-                android:layout_weight="10"
-                android:layout_margin="5dp"
-                android:layout_gravity="center"
-                android:gravity="center_vertical"
                 android:layout_height="80dp" />
 
         </LinearLayout>
@@ -37,7 +30,35 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="horizontal"
+            android:layout_marginTop="-20dp"
             android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="match_parent"
+                android:layout_margin="5dp"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_margin="5dp"
+                android:maxLines="2"
+                android:layout_height="wrap_content" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -77,13 +98,6 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/title"
-                android:layout_width="0dp"
-                android:layout_weight="2"
-                android:layout_margin="5dp"
-                android:maxLines="2"
-                android:layout_height="wrap_content" />
         </LinearLayout>
 
         <TextView

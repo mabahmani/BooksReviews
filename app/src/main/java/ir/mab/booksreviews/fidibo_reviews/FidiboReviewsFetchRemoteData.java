@@ -1,7 +1,10 @@
 package ir.mab.booksreviews.fidibo_reviews;
 
+import android.util.Log;
+
 import java.util.List;
 
+import ir.mab.booksreviews.book_detail.model.FidiboBookId;
 import ir.mab.booksreviews.fidibo_reviews.model.FidiboReview;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -9,17 +12,17 @@ import retrofit2.Response;
 
 public class FidiboReviewsFetchRemoteData implements FidiboReviewsContract.FetchRemoteData {
 
-    private String id;
+    private FidiboBookId id;
 
-    public FidiboReviewsFetchRemoteData(String id) {
+    public FidiboReviewsFetchRemoteData(FidiboBookId id) {
         this.id = id;
     }
 
-    public String getId() {
+    public FidiboBookId getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(FidiboBookId id) {
         this.id = id;
     }
 
@@ -34,14 +37,17 @@ public class FidiboReviewsFetchRemoteData implements FidiboReviewsContract.Fetch
         call.enqueue(new Callback<List<FidiboReview>>() {
             @Override
             public void onResponse(Call<List<FidiboReview>> call, Response<List<FidiboReview>> response) {
+                Log.d("FidibRev",response.message());
                 if (response.isSuccessful()){
+                    Log.d("FidibRev","success");
                     onFinishedListener.onFinished(response.body());
                 }
             }
 
             @Override
             public void onFailure(Call<List<FidiboReview>> call, Throwable throwable) {
-                    onFinishedListener.onFailure(throwable);
+                Log.d("FidibRev",throwable.getMessage());
+                onFinishedListener.onFailure(throwable);
             }
         });
     }
