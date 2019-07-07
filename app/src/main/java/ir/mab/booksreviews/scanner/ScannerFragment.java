@@ -105,13 +105,6 @@ public class ScannerFragment extends Fragment implements ScannerContract.View{
 
     @Override
     public void intentBookDeatilsActivity(String isbn) {
-        Barcode barcode = new Barcode();
-        barcode.setIsbn(isbn);
-        Date currentTime = Calendar.getInstance().getTime();
-        barcode.setDate(currentTime);
-        BarcodeList barcodeList = SharedPref.getInstance(getActivity()).getBarcodeList();
-        barcodeList.addBarcode(barcode);
-        SharedPref.getInstance(getActivity()).putBarcodeList(barcodeList);
 
         Intent intent = new Intent(getActivity(), BookDetailsActivity.class);
 

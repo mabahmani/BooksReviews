@@ -115,6 +115,7 @@ public class SearchFragment extends Fragment implements  SearchContract.View{
         }
         else {
             searchBg.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.INVISIBLE);
             searchCount.setText("0");
         }
     }

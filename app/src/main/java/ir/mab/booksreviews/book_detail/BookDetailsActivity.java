@@ -15,6 +15,9 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import ir.mab.booksreviews.MainActivity;
 import ir.mab.booksreviews.R;
 import ir.mab.booksreviews.amazon_reviews.model.AmazonReviewsActivity;
@@ -23,6 +26,9 @@ import ir.mab.booksreviews.book_detail.model.FidiboBookDetails;
 import ir.mab.booksreviews.book_detail.model.FidiboBookId;
 import ir.mab.booksreviews.fidibo_reviews.FidiboReviewsActivity;
 import ir.mab.booksreviews.goodreads_reviews.GoodreadsReviewsActivity;
+import ir.mab.booksreviews.history.Barcode;
+import ir.mab.booksreviews.history.BarcodeList;
+import ir.mab.booksreviews.utils.SharedPref;
 
 public class BookDetailsActivity extends AppCompatActivity implements BookDetailsContract.View{
 
@@ -39,6 +45,8 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
     private ProgressBar progressBar;
     private CardView amazon,goodreads,fidibo;
 
+    private String bookIsbn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +54,7 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
 
         Intent intent = getIntent();
         String isbn = intent.getStringExtra("isbn");
+        bookIsbn = isbn;
         isbn = "isbn:"+ isbn;
 
         //Toast.makeText(this,isbn,Toast.LENGTH_LONG).show();
@@ -151,6 +160,15 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
 
         progressBar.setVisibility(View.INVISIBLE);
         prog_back.setVisibility(View.INVISIBLE);
+
+        Barcode barcode = new Barcode();
+        barcode.setIsbn(bookIsbn);
+        Date currentTime = Calendar.getInstance().getTime();
+        barcode.setDate(currentTime);
+        barcode.setBookName(fidiboBookDetails.getTitle());
+        BarcodeList barcodeList = SharedPref.getInstance(this).getBarcodeList();
+        barcodeList.addBarcode(barcode);
+        SharedPref.getInstance(this).putBarcodeList(barcodeList);
     }
 
     @Override
@@ -242,6 +260,14 @@ public class BookDetailsActivity extends AppCompatActivity implements BookDetail
 
         Log.d("IMGAE_LINK",bookDetails.getItems().get(0).getVolumeInfo().getImageLinks().getThumbnail());
 
+        Barcode barcode = new Barcode();
+        barcode.setIsbn(bookIsbn);
+        Date currentTime = Calendar.getInstance().getTime();
+        barcode.setDate(currentTime);
+        barcode.setBookName(bookDetails.getItems().get(0).getVolumeInfo().getTitle());
+        BarcodeList barcodeList = SharedPref.getInstance(this).getBarcodeList();
+        barcodeList.addBarcode(barcode);
+        SharedPref.getInstance(this).putBarcodeList(barcodeList);
     }
 
     @Override

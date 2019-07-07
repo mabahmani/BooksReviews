@@ -71,6 +71,7 @@ public class ScannerPresenter implements ScannerContract.Presenter {
     }
 
     static class Detector extends AsyncTask<FirebaseVisionImage,Boolean,Integer> {
+        private boolean stop = false;
 
         private ScannerContract.View view;
         private ScannerContract.Presenter presenter;
@@ -91,7 +92,8 @@ public class ScannerPresenter implements ScannerContract.Presenter {
                         .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionBarcode>>() {
                             @Override
                             public void onSuccess(List<FirebaseVisionBarcode> barcodes) {
-                                if (barcodes.size() > 0) {
+                                if (barcodes.size() > 0 && !stop) {
+                                    stop = true;
                                     presenter.stop();
                                     view.releaseCameraAndPreview();
                                     view.intentBookDeatilsActivity(barcodes.get(0).getRawValue());

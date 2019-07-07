@@ -38,6 +38,7 @@ public class BarcodeListAdapter extends RecyclerView.Adapter<BarcodeListAdapter.
     public void onBindViewHolder(@NonNull final BarcodeListAdapter.ViewHolder viewHolder, final int i) {
         viewHolder.isbn.setText(barcodeList.get(i).getIsbn());
         viewHolder.date.setText(barcodeList.get(i).getDate().toString());
+        viewHolder.bookName.setText(barcodeList.get(i).getBookName());
 
         viewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,12 +58,14 @@ public class BarcodeListAdapter extends RecyclerView.Adapter<BarcodeListAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView isbn;
         TextView date;
+        TextView bookName;
         CardView cardView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             cardView = itemView.findViewById(R.id.card);
             isbn = itemView.findViewById(R.id.ISBN);
             date = itemView.findViewById(R.id.Date);
+            bookName = itemView.findViewById(R.id.book_name);
         }
     }
 }
